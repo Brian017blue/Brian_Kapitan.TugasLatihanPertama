@@ -54,7 +54,6 @@
                               <td class="px-6 py-4">{{ $dosen->kode_dosen }}</td>
                               <td class="px-6 py-4">{{ $dosen->nip }}</td>
                               <td class="px-6 py-4">{{ $dosen->name }}</td>
-                              <!-- Periksa jika dosen yang login memiliki akses CRUD -->
                               <td>
                                 <a href="{{ route('dosens.edit', $dosen->id) }}" class="text-white bg-cyan-600 hover:bg-cyan-700 focus:ring-4 
                                 focus:ring-cyan-200 font-medium rounded-lg text-sm inline-flex items-center px-1 py-1 text-center">

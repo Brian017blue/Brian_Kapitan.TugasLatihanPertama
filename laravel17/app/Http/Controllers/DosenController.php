@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Dosen;
-use App\Models\DosenWali1;
-use App\Models\DosenWali2;
 use App\Models\EditRequest;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
@@ -92,45 +90,12 @@ class DosenController extends Controller
     }
 
    
-    public function KelasTI() {
-        $requests = EditRequest::where('kelas_id', 772)->get();
-        return view('dosen.list_req', ['mahasiswas' => $requests, 'kelas' => 'Kelas TI']);
-    }
-
-    public function KelasSI() {
-        $requests = EditRequest::where('kelas_id', 771)->get();
-        return view('dosen.list_req', ['mahasiswas' => $requests, 'kelas' => 'Kelas SI']);
-
-    }
    
     public function listRequests() {
         $requests = EditRequest::where('status', 'pending')->get();
         return view('dosen.list_req', compact('requests'));
     }
  
-   // DosenController //
-
-public function listRequests1() {
-    $user = Auth::user();
-
-    if (DosenWali1::where('user_id', $user->name)->exists()) {
-        $kelasId = 771;
-    } elseif (DosenWali2::where('user_id', $user->name)->exists()) {
-        $kelasId = 772;
-    } else {
-        $kelasId = null;
-    }
-    if ($kelasId) {
-        $requests = EditRequest::where('status', 'pending')
-                               ->where('kelas_id', $kelasId)
-                               ->get();
-    } else {
-        $requests = collect(); 
-    }
-
-    return view('dosen.list_req', compact('requests'));
-}
-
     
 
     public function approveRequest($id)
@@ -159,27 +124,6 @@ public function listRequests1() {
         }
 
         return redirect()->back()->with('error', 'Permintaan tidak valid atau telah diproses.');
-    }
-
-    
-
-    public function showKelas($id)
-    {
-        $user = Auth::user();
-        // Menentukan model dan tampilan berdasarkan kelas_id
-        if ($id == 771) {
-            $dosens = DosenWali1::where('kelas_id', 771)->get();
-            $view = 'dosen.kelas_si';
-            $kelas = 'Kelas SI';
-        } elseif ($id == 772) {
-            $dosens = DosenWali2::where('kelas_id', 772)->get();
-            $view = 'dosen.kelas_ti';
-            $kelas = 'Kelas TI';
-        } else {
-            abort(404, 'Kelas tidak ditemukan');
-        }
-    
-        return view($view, compact('dosens', 'kelas'));
     }
 
     

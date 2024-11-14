@@ -132,7 +132,6 @@ public function approveEdit($id)
 
         $mahasiswa = $request->mahasiswa;
         $mahasiswa ->status = 'approved';
-        dd($request);  // Debugging untuk melihat data setelah perubahan
         $mahasiswa->save();
 
         $request->delete();

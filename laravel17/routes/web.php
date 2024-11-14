@@ -59,7 +59,6 @@ Route::get('/dosen/list_req', [DosenController::class, 'listRequests'])->name('d
 Route::post('/dosen/approve-request/{id}', [DosenController::class, 'approveRequest'])->name('dosen.approveRequest');
 Route::post('/dosen/reject-request/{id}', [DosenController::class, 'rejectRequest'])->name('dosen.rejectRequest');
 Route::delete('/dosen/{id}', [DosenController::class, 'destroy'])->name('dosen.destroy');
-Route::post('/kelas/dosen/{id}', [DosenController::class, 'showKelas'])->name('kelas.dosen');
 
 
 Route::get('/mahasiswa/kelas1', [MahasiswaController::class, 'showKelasSI'])->name('mahasiswa.showKelasSI');
